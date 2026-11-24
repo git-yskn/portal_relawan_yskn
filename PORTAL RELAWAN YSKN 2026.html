@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Relawan - Pejuang Sahabat Kemanusiaan Nusantara (YSKN)</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://i.pinimg.com/736x/34/d8/b0/34d8b0f8cbd03d6b344e539c42246bc9.jpg">
+
+  <!-- Tailwind CSS CDN (preflight dinonaktifkan agar aman berdampingan dengan Bootstrap) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: {
+        preflight: false,
+      },
+      theme: {
+        extend: {
+          colors: {
+            yskOrange: '#e65100',
+            yskOrangeDark: '#bf360c',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #e65100;
+      --primary-dark: #bf360c;
+      --dark: #212121;
+      --gray-text: #616161;
+      --gray-bg: #f5f5f5;
+      --border: #e0e0e0;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: clip;
+      background-color: #ffffff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Header & Navbar */
+    .top-bar {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      background: #fff;
+    }
+
+    .header-top-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1 1 260px;
+    }
+
+    .brand-logo-img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--primary);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: clamp(20px, 4.5vw, 25px);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      text-align: left;
+    }
+
+    .logo-text span {
+      color: var(--dark);
+    }
+
+    .subtitle-text {
+      font-size: clamp(11.5px, 3vw, 13px);
+      font-weight: 600;
+      color: var(--gray-text);
+      margin: 2px 0 0 0;
+      line-height: 1.3;
+    }
+
+    .search-box {
+      display: flex;
+      flex: 1 1 300px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .search-box input {
+      width: 100%;
+      min-width: 0;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px 0 0 20px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-box button {
+      padding: 9px 16px;
+      border: 1px solid var(--primary);
+      background: var(--primary);
+      color: #fff;
+      border-radius: 0 20px 20px 0;
+      cursor: pointer;
+      font-weight: 600;
+      flex-shrink: 0;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-box button:hover {
+      background: var(--primary-dark);
+    }
+
+    .main-nav {
+      background: var(--primary);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .mobile-bar {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      padding: 10px 0;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-list button.nav-link-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 4px 2px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-list button.nav-link-btn:hover,
+    .nav-list button.nav-link-btn.active-nav {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .mobile-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Layout Utama */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+      gap: 32px;
+      margin-top: 24px;
+      margin-bottom: 48px;
+    }
+
+    .main-grid > article,
+    .main-grid > aside {
+      min-width: 0;
+    }
+
+    .breadcrumb-bar {
+      font-size: 13px;
+      color: var(--gray-text);
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .category-label {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .article-title {
+      font-size: clamp(21px, 4.5vw, 28px);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+
+    .article-meta {
+      font-size: 13px;
+      color: var(--gray-text);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .share-buttons button {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .share-buttons button:hover {
+      background: var(--gray-bg);
+    }
+
+    .article-lead {
+      font-size: 15px;
+      color: var(--dark);
+      background: var(--gray-bg);
+      padding: 14px 16px;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 18px;
+    }
+
+    /* Galeri Slider */
+    .gallery-wrapper {
+      background: #111;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .slider-stage {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .slider-stage img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(230, 81, 0, 0.9);
+    }
+
+    .prev-btn { left: 0; border-radius: 0 4px 4px 0; }
+    .next-btn { right: 0; border-radius: 4px 0 0 4px; }
+
+    .slide-counter {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.72);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .caption-box {
+      background: var(--gray-bg);
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--dark);
+      font-size: 14.5px;
+    }
+
+    .caption-box small {
+      display: block;
+      margin-top: 6px;
+      color: var(--gray-text);
+      font-size: 12px;
+    }
+
+    .thumbnail-strip {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #1c1c1c;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .thumb-item {
+      width: 72px;
+      height: 52px;
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.55;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      flex-shrink: 0;
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+    }
+
+    .thumb-item.active {
+      opacity: 1;
+      border-color: var(--primary);
+    }
+
+    /* Tags & Laporan Terkait */
+    .tags-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 24px 0;
+    }
+
+    .tag-pill {
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag-pill:hover,
+    .tag-pill.active-tag {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .section-heading {
+      font-size: clamp(16px, 3.5vw, 18px);
+      font-weight: 800;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .related-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 32px;
+    }
+
+    .related-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .related-btn {
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--dark);
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .related-btn:hover {
+      color: var(--primary);
+    }
+
+    /* Kolom Komentar */
+    .comment-box textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      resize: vertical;
+      min-height: 90px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .comment-box button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .comment-box button:hover {
+      background: var(--primary-dark);
+    }
+
+    .comment-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comment-author {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .comment-date {
+      font-size: 12px;
+      color: var(--gray-text);
+      margin-left: 6px;
+    }
+
+    /* Sidebar */
+    .popular-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .popular-rank {
+      font-size: 20px;
+      font-weight: 800;
+      color: #bdbdbd;
+      line-height: 1.1;
+      flex-shrink: 0;
+    }
+
+    .popular-title-btn {
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--dark);
+      cursor: pointer;
+    }
+
+    .popular-title-btn:hover {
+      color: var(--primary);
+    }
+
+    .volunteer-cta-card {
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 24px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gray-bg);
+      border-top: 3px solid var(--primary);
+      padding: 28px 0;
+      font-size: 13px;
+      color: var(--gray-text);
+    }
+
+    .footer-link-btn {
+      background: transparent;
+      border: none;
+      padding: 4px 0;
+      color: var(--gray-text);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .footer-link-btn:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Tablet & Mobile Breakpoints */
+    @media (max-width: 991.98px) {
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        margin-top: 18px;
+        margin-bottom: 36px;
+      }
+
+      .mobile-bar {
+        display: flex;
+      }
+
+      .nav-list {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 6px 0 14px 0;
+      }
+
+      .nav-list.open {
+        display: flex;
+      }
+
+      .nav-list button.nav-link-btn {
+        width: 100%;
+        text-align: left;
+        padding: 9px 10px;
+        border-radius: 6px;
+        white-space: normal;
+      }
+
+      .nav-list button.nav-link-btn.active-nav {
+        background: rgba(255, 255, 255, 0.16);
+        text-decoration: none;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .search-box {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+
+      .slider-stage {
+        height: 260px;
+      }
+
+      .nav-arrow {
+        width: 34px;
+        height: 44px;
+        font-size: 18px;
+      }
+
+      .comment-box button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 479.98px) {
+      .brand-logo-img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .slider-stage {
+        height: 220px;
+      }
+
+      .thumb-item {
+        width: 62px;
+        height: 46px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-bar">
+    <div class="container">
+      <div class="header-top-wrap">
+        <div class="brand-lockup">
+          <img
+            src="https://i.pinimg.com/736x/34/d8/b0/34d8b0f8cbd03d6b344e539c42246bc9.jpg"
+            alt="Logo Yayasan Sahabat Kemanusiaan Nusantara (YSKN)"
+            class="brand-logo-img"
+          >
+          <div>
+            <button type="button" class="logo-text bg-transparent border-0 p-0" onclick="resetFilters()">
+              Portal<span>Relawan</span>
+            </button>
+            <p class="subtitle-text">Pejuang Sahabat Kemanusiaan Nusantara</p>
+          </div>
+        </div>
+
+        <form class="search-box" id="searchForm">
+          <input type="text" id="searchInput" placeholder="Cari aksi relawan, logistik, atau program YSKN..." aria-label="Cari aktivitas relawan YSKN">
+          <button type="submit">Cari</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigasi Kategori -->
+  <nav class="main-nav" aria-label="Navigasi Utama Portal Relawan">
+    <div class="container">
+      <div class="mobile-bar">
+        <span class="fw-bold small">Menu Portal Relawan YSKN</span>
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuBtn" aria-expanded="false" aria-controls="mainNavList">
+          &#9776; Menu
+        </button>
+      </div>
+      <ul class="nav-list" id="mainNavList">
+        <li><button type="button" class="nav-link-btn active-nav" data-filter="semua">Beranda</button></li>
+        <li><button type="button" class="nav-link-btn" data-filter="logistik">Aksi Lapangan</button></li>
+        <li><button type="button" class="nav-link-btn" data-filter="bencana">Tanggap Bencana</button></li>
+        <li><button type="button" class="nav-link-btn" data-filter="pendidikan">Pendidikan &amp; Kesehatan</button></li>
+        <li><button type="button" class="nav-link-btn" data-filter="galeri">Galeri Relawan</button></li>
+        <li><button type="button" class="nav-link-btn" onclick="openJoinModal()">Gabung Relawan</button></li>
+        <li><button type="button" class="nav-link-btn" onclick="openInfoModal('tentang')">Tentang YSKN</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Notifikasi Status Interaktif -->
+  <div class="container mt-3" id="statusBannerContainer" style="display: none;">
+    <div class="alert alert-warning alert-dismissible fade show d-flex flex-wrap align-items-center justify-content-between gap-2 mb-0" role="alert">
+      <span id="statusBannerText" class="small fw-semibold"></span>
+      <button type="button" class="btn btn-sm btn-outline-dark" onclick="resetFilters()">Tampilkan Semua</button>
+    </div>
+  </div>
+
+  <!-- Konten Utama -->
+  <main class="container main-grid">
+
+    <!-- Kolom Artikel & Galeri -->
+    <article>
+      <div class="breadcrumb-bar">Portal Relawan &rsaquo; Pejuang Sahabat Kemanusiaan Nusantara (YSKN)</div>
+      <span class="category-label" id="activeCategoryLabel">Galeri Foto Relawan</span>
+      <h1 class="article-title">Potret Aksi Relawan YSKN: Dari Distribusi Logistik hingga Kelas Belajar di Pelosok</h1>
+
+      <div class="article-meta">
+        <span>Tim Media Relawan - Yayasan Sahabat Kemanusiaan Nusantara (YSKN) | Rabu, 25 November 2026 08:00 WIB</span>
+        <div class="share-buttons">
+          <button type="button" id="copyLinkBtn">Salin Link</button>
+          <button type="button" id="shareInfoBtn">Bagikan Aksi</button>
+        </div>
+      </div>
+
+      <p class="article-lead">
+        Relawan <strong>Yayasan Sahabat Kemanusiaan Nusantara (YSKN)</strong> terus bergerak mendampingi masyarakat rentan di berbagai wilayah Indonesia melalui penyaluran bantuan pangan, layanan kesehatan keliling, rehabilitasi fasilitas umum, serta pendampingan anak-anak.
+      </p>
+
+      <!-- Komponen Galeri Foto -->
+      <div class="gallery-wrapper">
+        <div class="slider-stage">
+          <span class="slide-counter" id="slideCounter">1 / 4</span>
+          <button type="button" class="nav-arrow prev-btn" onclick="changeSlide(-1)" aria-label="Foto sebelumnya">&#10094;</button>
+          <img id="mainImage" src="" alt="Foto Aktivitas Relawan YSKN">
+          <button type="button" class="nav-arrow next-btn" onclick="changeSlide(1)" aria-label="Foto berikutnya">&#10095;</button>
+        </div>
+
+        <div class="caption-box">
+          <p id="imageCaption" class="mb-1"></p>
+          <small id="imageCredit"></small>
+        </div>
+
+        <div class="thumbnail-strip" id="thumbnailStrip"></div>
+      </div>
+
+      <!-- Tags -->
+      <div class="tags-box" aria-label="Filter Topik Relawan">
+        <button type="button" class="tag-pill" data-tag="YSKN">YSKN</button>
+        <button type="button" class="tag-pill" data-tag="pejuang kemanusiaan">pejuang kemanusiaan</button>
+        <button type="button" class="tag-pill" data-tag="relawan nusantara">relawan nusantara</button>
+        <button type="button" class="tag-pill" data-tag="aksi sosial">aksi sosial</button>
+      </div>
+
+      <!-- Laporan Terkait -->
+      <h2 class="section-heading">Laporan Aksi Terkait</h2>
+      <ul class="related-list" id="relatedList"></ul>
+
+      <!-- Kolom Komentar -->
+      <h2 class="section-heading" id="commentHeading">Catatan Dukungan (2)</h2>
+      <div class="comment-box">
+        <textarea id="commentInput" placeholder="Tulis pesan semangat atau catatan dukungan untuk relawan YSKN..."></textarea>
+        <button type="button" id="submitCommentBtn">Kirim Dukungan</button>
+      </div>
+
+      <div id="commentList" class="mt-3">
+        <div class="comment-item">
+          <div><span class="comment-author">Budi Santoso</span><span class="comment-date">2 jam lalu</span></div>
+          <p class="small mt-1 mb-0">Salut untuk teman-teman relawan YSKN yang konsisten turun langsung ke lapangan membantu warga.</p>
+        </div>
+        <div class="comment-item">
+          <div><span class="comment-author">Nadia Putri</span><span class="comment-date">5 jam lalu</span></div>
+          <p class="small mt-1 mb-0">Semoga langkah para Pejuang Sahabat Kemanusiaan Nusantara selalu diberi kesehatan dan kemudahan.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Sidebar -->
+    <aside>
+      <h2 class="section-heading">Aksi Terpopuler</h2>
+      <div id="popularList"></div>
+
+      <div class="volunteer-cta-card">
+        <h3 class="h6 fw-bold mb-2" style="color: var(--primary-dark);">Siap Mengabdi Bersama YSKN?</h3>
+        <p class="small text-secondary mb-3">
+          Bergabunglah bersama para Pejuang Sahabat Kemanusiaan Nusantara dalam aksi tanggap darurat, pendidikan, dan pemberdayaan warga.
+        </p>
+        <button type="button" class="btn btn-sm w-100 text-white fw-semibold" style="background-color: var(--primary);" onclick="openJoinModal()">
+          Daftar Jadi Relawan YSKN
+        </button>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-3 align-items-center justify-content-between">
+        <div class="col-lg-7">
+          <p class="mb-1">
+            <strong>Portal Relawan</strong> &mdash; Pejuang Sahabat Kemanusiaan Nusantara | <strong>Yayasan Sahabat Kemanusiaan Nusantara (YSKN)</strong> &copy; 2026. Seluruh hak cipta dilindungi undang-undang.
+          </p>
+          <p class="mb-0">
+            Dikembangkan oleh <strong>WasobiTech Studio AI</strong> &bull; Kontak Posko Relawan: <span class="fw-semibold">relawan@yskn.or.id</span>
+          </p>
+        </div>
+        <div class="col-lg-5 d-flex flex-wrap gap-3 justify-content-lg-end">
+          <button type="button" class="footer-link-btn" onclick="openInfoModal('tentang')">Profil YSKN</button>
+          <button type="button" class="footer-link-btn" onclick="openInfoModal('kontak')">Kontak &amp; Posko</button>
+          <button type="button" class="footer-link-btn" onclick="openJoinModal()">Pendaftaran Relawan</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Detail Laporan / Informasi YSKN -->
+  <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="reportModalTitle">Detail Laporan YSKN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body" id="reportModalBody"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Gabung Relawan YSKN -->
+  <div class="modal fade" id="joinVolunteerModal" tabindex="-1" aria-labelledby="joinVolunteerModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="joinVolunteerModalTitle">Formulir Pendaftaran Relawan YSKN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <form id="volunteerForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="volName" class="form-label small fw-semibold">Nama Lengkap</label>
+              <input type="text" class="form-control" id="volName" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
+            <div class="mb-3">
+              <label for="volDomicile" class="form-label small fw-semibold">Domisili / Wilayah Penugasan</label>
+              <input type="text" class="form-control" id="volDomicile" placeholder="Contoh: Bekasi, Jawa Barat" required>
+            </div>
+            <div class="mb-3">
+              <label for="volDivision" class="form-label small fw-semibold">Minat Bidang Pengabdian</label>
+              <select class="form-select" id="volDivision">
+                <option value="Distribusi Logistik & Dapur Umum">Distribusi Logistik &amp; Dapur Umum</option>
+                <option value="Tanggap Bencana & Evakuasi">Tanggap Bencana &amp; Evakuasi</option>
+                <option value="Pendidikan Anak & Literasi">Pendidikan Anak &amp; Literasi</option>
+                <option value="Layanan Kesehatan Komunitas">Layanan Kesehatan Komunitas</option>
+              </select>
+            </div>
+            <div id="volunteerSuccessAlert" class="alert alert-success small mb-0 d-none" role="alert"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-sm text-white fw-semibold" style="background-color: var(--primary);">Kirim Pendaftaran</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Data Slide Galeri Aktivitas Relawan YSKN
+    const slides = [
+      {
+        src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=80",
+        category: "logistik",
+        tags: ["YSKN", "aksi sosial", "pejuang kemanusiaan"],
+        caption: "Slide 1: Relawan YSKN menyiapkan dan menyortir paket bantuan sembako serta kebutuhan pokok sebelum didistribusikan kepada keluarga prasejahtera.",
+        credit: "Foto: Dok. Humas YSKN"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=80",
+        category: "pendidikan",
+        tags: ["YSKN", "relawan nusantara", "aksi sosial"],
+        caption: "Slide 2: Sesi belajar bersama dan pendampingan psikososial anak-anak binaan oleh relawan pendidikan Yayasan Sahabat Kemanusiaan Nusantara.",
+        credit: "Foto: Dok. Tim Pendidikan YSKN"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80",
+        category: "pendidikan",
+        tags: ["YSKN", "pejuang kemanusiaan", "relawan nusantara"],
+        caption: "Slide 3: Pemeriksaan kesehatan dasar dan konsultasi medis gratis bagi warga lansia serta ibu dan anak di pos pelayanan sosial YSKN.",
+        credit: "Foto: Dok. Tim Medis Relawan YSKN"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=900&q=80",
+        category: "bencana",
+        tags: ["YSKN", "relawan nusantara", "aksi sosial", "pejuang kemanusiaan"],
+        caption: "Slide 4: Aksi pelestarian lingkungan dan pemulihan kawasan hijau bersama relawan komunitas dan warga setempat untuk mitigasi bencana.",
+        credit: "Foto: Dok. Relawan Lingkungan YSKN"
+      }
+    ];
+
+    const relatedReports = [
+      {
+        id: "rel-1",
+        category: "logistik",
+        tags: ["YSKN", "aksi sosial"],
+        title: "Relawan YSKN Salurkan 1.200 Paket Pangan dan Air Bersih untuk Warga Terdampak Cuaca Ekstrem",
+        summary: "Tim logistik Yayasan Sahabat Kemanusiaan Nusantara menyalurkan paket beras, minyak goreng, air mineral bersih, serta perlengkapan keluarga di titik posko bersama warga setempat."
+      },
+      {
+        id: "rel-2",
+        category: "pendidikan",
+        tags: ["YSKN", "relawan nusantara"],
+        title: "Program Sekolah Ceria YSKN Hadirkan Ruang Baca dan Perlengkapan Belajar di Desa Binaan",
+        summary: "Relawan pendidikan YSKN membuka kelas literasi, numerasi, dan bimbingan belajar rutin bagi anak-anak di wilayah binaan agar semangat belajar tetap terjaga."
+      },
+      {
+        id: "rel-3",
+        category: "bencana",
+        tags: ["pejuang kemanusiaan", "relawan nusantara"],
+        title: "Pelatihan Siaga Bencana dan Pertolongan Pertama bagi Relawan Daerah Bersama YSKN",
+        summary: "Pembekalan simulasi tanggap darurat, manajemen posko pengungsian, serta pertolongan pertama gawat darurat bagi relawan daerah di bawah koordinasi YSKN."
+      }
+    ];
+
+    const popularReports = [
+      {
+        rank: "#1",
+        title: "Open Recruitment Relawan Lapangan YSKN Gelombang IV Dibuka untuk Umum",
+        summary: "Pendaftaran relawan baru Yayasan Sahabat Kemanusiaan Nusantara dibuka untuk berbagai divisi: logistik, tanggap darurat, pendidikan, kesehatan, dan dokumentasi lapangan."
+      },
+      {
+        rank: "#2",
+        title: "Layanan Cek Kesehatan Gratis dan Edukasi Gizi Keluarga Bersama Tim Medis YSKN",
+        summary: "Relawan tenaga kesehatan YSKN menggelar pemeriksaan tekanan darah, gula darah, konsultasi umum, serta edukasi gizi seimbang bagi keluarga dan lansia."
+      },
+      {
+        rank: "#3",
+        title: "Gotong Royong Pembersihan Lingkungan dan Penanaman Pohon Cegah Longsor",
+        summary: "Bersama masyarakat desa dan relawan lingkungan, YSKN melakukan penanaman bibit pohon keras serta pembersihan saluran air menjelang puncak musim hujan."
+      },
+      {
+        rank: "#4",
+        title: "Dapur Umum YSKN Siapkan Ribuan Paket Makanan Hangat untuk Keluarga Prasejahtera",
+        summary: "Relawan dapur umum menyiapkan makanan siap santap bergizi setiap hari untuk dibagikan langsung kepada pekerja harian lepas, lansia, dan warga terdampak."
+      },
+      {
+        rank: "#5",
+        title: "Kisah Relawan Muda YSKN Mengajar Literasi Digital di Komunitas Pemuda Desa",
+        summary: "Relawan muda YSKN membekali pemuda desa dengan keterampilan digital dasar, keamanan informasi, dan pemanfaatan media produktif untuk kegiatan sosial."
+      }
+    ];
+
+    let filteredSlides = [...slides];
+    let currentIndex = 0;
+    let commentCount = 2;
+
+    const mainImage = document.getElementById("mainImage");
+    const imageCaption = document.getElementById("imageCaption");
+    const imageCredit = document.getElementById("imageCredit");
+    const slideCounter = document.getElementById("slideCounter");
+    const thumbnailStrip = document.getElementById("thumbnailStrip");
+    const relatedList = document.getElementById("relatedList");
+    const popularList = document.getElementById("popularList");
+    const statusBannerContainer = document.getElementById("statusBannerContainer");
+    const statusBannerText = document.getElementById("statusBannerText");
+    const activeCategoryLabel = document.getElementById("activeCategoryLabel");
+
+    const reportModal = new bootstrap.Modal(document.getElementById("reportModal"));
+    const joinVolunteerModal = new bootstrap.Modal(document.getElementById("joinVolunteerModal"));
+
+    function closeMobileMenu() {
+      const navList = document.getElementById("mainNavList");
+      const toggleBtn = document.getElementById("mobileMenuBtn");
+      navList.classList.remove("open");
+      if (toggleBtn) {
+        toggleBtn.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    function showBanner(message) {
+      statusBannerText.textContent = message;
+      statusBannerContainer.style.display = "block";
+    }
+
+    function hideBanner() {
+      statusBannerContainer.style.display = "none";
+    }
+
+    function renderThumbnails() {
+      thumbnailStrip.innerHTML = "";
+      filteredSlides.forEach((slide, index) => {
+        const img = document.createElement("img");
+        img.src = slide.src;
+        img.alt = "Thumbnail aktivitas relawan YSKN " + (index + 1);
+        img.className = "thumb-item" + (index === currentIndex ? " active" : "");
+        img.addEventListener("click", () => goToSlide(index));
+        thumbnailStrip.appendChild(img);
+      });
+    }
+
+    function updateGallery() {
+      if (filteredSlides.length === 0) {
+        filteredSlides = [...slides];
+        currentIndex = 0;
+      }
+      const current = filteredSlides[currentIndex];
+      mainImage.src = current.src;
+      mainImage.alt = current.caption;
+      imageCaption.textContent = current.caption;
+      imageCredit.textContent = current.credit;
+      slideCounter.textContent = `${currentIndex + 1} / ${filteredSlides.length}`;
+      renderThumbnails();
+    }
+
+    function changeSlide(step) {
+      currentIndex = (currentIndex + step + filteredSlides.length) % filteredSlides.length;
+      updateGallery();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateGallery();
+    }
+
+    function openReportModal(title, summary) {
+      closeMobileMenu();
+      document.getElementById("reportModalTitle").textContent = title;
+      document.getElementById("reportModalBody").innerHTML = `
+        <p class="mb-2">${summary}</p>
+        <p class="small text-secondary mb-0">Sumber: Tim Dokumentasi &amp; Lapangan Yayasan Sahabat Kemanusiaan Nusantara (YSKN).</p>
+      `;
+      reportModal.show();
+    }
+
+    function openInfoModal(type) {
+      if (type === "tentang") {
+        openReportModal(
+          "Tentang Yayasan Sahabat Kemanusiaan Nusantara (YSKN)",
+          "Yayasan Sahabat Kemanusiaan Nusantara (YSKN) menghimpun dan menggerakkan para Pejuang Sahabat Kemanusiaan Nusantara untuk aksi sosial kemanusiaan, tanggap darurat, pendidikan anak, serta layanan kesehatan masyarakat."
+        );
+      } else {
+        openReportModal(
+          "Kontak & Koordinasi Posko Relawan YSKN",
+          "Untuk koordinasi kegiatan lapangan, kemitraan aksi sosial, atau informasi posko relawan YSKN, silakan hubungi kanal resmi kami di relawan@yskn-nusantara.org."
+        );
+      }
+    }
+
+    function openJoinModal() {
+      closeMobileMenu();
+      document.getElementById("volunteerSuccessAlert").classList.add("d-none");
+      document.getElementById("volunteerForm").reset();
+      joinVolunteerModal.show();
+    }
+
+    function renderRelatedReports(items) {
+      relatedList.innerHTML = "";
+      if (items.length === 0) {
+        relatedList.innerHTML = `<li class="text-secondary small">Tidak ada laporan terkait untuk filter ini.</li>`;
+        return;
+      }
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "related-btn";
+        btn.textContent = item.title;
+        btn.addEventListener("click", () => openReportModal(item.title, item.summary));
+        li.appendChild(btn);
+        relatedList.appendChild(li);
+      });
+    }
+
+    function renderPopularReports() {
+      popularList.innerHTML = "";
+      popularReports.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "popular-item";
+        div.innerHTML = `<span class="popular-rank">${item.rank}</span>`;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "popular-title-btn";
+        btn.textContent = item.title;
+        btn.addEventListener("click", () => openReportModal(item.title, item.summary));
+        div.appendChild(btn);
+        popularList.appendChild(div);
+      });
+    }
+
+    function setActiveNav(filterKey) {
+      document.querySelectorAll(".nav-link-btn[data-filter]").forEach((btn) => {
+        btn.classList.toggle("active-nav", btn.dataset.filter === filterKey);
+      });
+      document.querySelectorAll(".tag-pill").forEach((tag) => {
+        tag.classList.remove("active-tag");
+      });
+    }
+
+    function filterByCategory(categoryKey) {
+      setActiveNav(categoryKey);
+      if (categoryKey === "semua" || categoryKey === "galeri") {
+        filteredSlides = [...slides];
+        currentIndex = 0;
+        activeCategoryLabel.textContent = "Galeri Foto Relawan";
+        renderRelatedReports(relatedReports);
+        hideBanner();
+        updateGallery();
+        return;
+      }
+
+      const labelMap = {
+        logistik: "Aksi Lapangan & Logistik",
+        bencana: "Tanggap Bencana & Lingkungan",
+        pendidikan: "Pendidikan & Kesehatan"
+      };
+
+      activeCategoryLabel.textContent = labelMap[categoryKey] || "Galeri Foto Relawan";
+      const matchedSlides = slides.filter((s) => s.category === categoryKey);
+      filteredSlides = matchedSlides.length > 0 ? matchedSlides : [...slides];
+      currentIndex = 0;
+
+      const matchedReports = relatedReports.filter((r) => r.category === categoryKey);
+      renderRelatedReports(matchedReports.length > 0 ? matchedReports : relatedReports);
+
+      showBanner(`Menampilkan aktivitas relawan YSKN pada kategori: ${labelMap[categoryKey]}.`);
+      updateGallery();
+    }
+
+    function resetFilters() {
+      document.getElementById("searchInput").value = "";
+      filterByCategory("semua");
+    }
+
+    // Event Listener Navigasi Kategori
+    document.querySelectorAll(".nav-link-btn[data-filter]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterByCategory(btn.dataset.filter);
+        closeMobileMenu();
+      });
+    });
+
+    // Event Listener Hamburger Menu Mobile
+    document.getElementById("mobileMenuBtn").addEventListener("click", function () {
+      const navList = document.getElementById("mainNavList");
+      const isOpen = navList.classList.toggle("open");
+      this.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    // Event Listener Tag Filter
+    document.querySelectorAll(".tag-pill").forEach((tagBtn) => {
+      tagBtn.addEventListener("click", () => {
+        const tagValue = tagBtn.dataset.tag;
+        document.querySelectorAll(".tag-pill").forEach((t) => t.classList.remove("active-tag"));
+        tagBtn.classList.add("active-tag");
+
+        const matchedSlides = slides.filter((s) => s.tags.includes(tagValue));
+        filteredSlides = matchedSlides.length > 0 ? matchedSlides : [...slides];
+        currentIndex = 0;
+        updateGallery();
+
+        const matchedReports = relatedReports.filter((r) => r.tags.includes(tagValue));
+        renderRelatedReports(matchedReports.length > 0 ? matchedReports : relatedReports);
+        showBanner(`Menampilkan konten terkait topik: #${tagValue}`);
+      });
+    });
+
+    // Event Listener Pencarian
+    document.getElementById("searchForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (!query) {
+        resetFilters();
+        return;
+      }
+
+      const matchedSlides = slides.filter(
+        (s) => s.caption.toLowerCase().includes(query) || s.credit.toLowerCase().includes(query)
+      );
+      const matchedReports = relatedReports.filter(
+        (r) => r.title.toLowerCase().includes(query) || r.summary.toLowerCase().includes(query)
+      );
+
+      filteredSlides = matchedSlides.length > 0 ? matchedSlides : [...slides];
+      currentIndex = 0;
+      updateGallery();
+      renderRelatedReports(matchedReports);
+
+      showBanner(
+        `Hasil pencarian "${query}": ${matchedSlides.length} foto galeri dan ${matchedReports.length} laporan aksi ditemukan.`
+      );
+    });
+
+    // Tombol Salin Link & Bagikan
+    document.getElementById("copyLinkBtn").addEventListener("click", async () => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(window.location.href);
+        }
+        showBanner("Tautan Portal Relawan Yayasan Sahabat Kemanusiaan Nusantara (YSKN) berhasil disalin.");
+      } catch (err) {
+        showBanner("Tautan siap dibagikan: Portal Relawan YSKN.");
+      }
+    });
+
+    document.getElementById("shareInfoBtn").addEventListener("click", () => {
+      openReportModal(
+        "Bagikan Aksi Relawan YSKN",
+        "Ajak rekan dan sahabat untuk mendukung kegiatan sosial kemanusiaan Yayasan Sahabat Kemanusiaan Nusantara (YSKN) di berbagai daerah."
+      );
+    });
+
+    // Kirim Catatan Dukungan
+    document.getElementById("submitCommentBtn").addEventListener("click", () => {
+      const input = document.getElementById("commentInput");
+      const text = input.value.trim();
+      if (!text) {
+        showBanner("Silakan tuliskan pesan dukungan terlebih dahulu sebelum mengirim.");
+        return;
+      }
+
+      const list = document.getElementById("commentList");
+      const item = document.createElement("div");
+      item.className = "comment-item";
+      item.innerHTML = `
+        <div><span class="comment-author">Sahabat YSKN</span><span class="comment-date">Baru saja</span></div>
+        <p class="small mt-1 mb-0"></p>
+      `;
+      item.querySelector("p").textContent = text;
+      list.prepend(item);
+      input.value = "";
+
+      commentCount += 1;
+      document.getElementById("commentHeading").textContent = `Catatan Dukungan (${commentCount})`;
+      hideBanner();
+    });
+
+    // Submit Formulir Pendaftaran Relawan
+    document.getElementById("volunteerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("volName").value.trim();
+      const domicile = document.getElementById("volDomicile").value.trim();
+      const division = document.getElementById("volDivision").value;
+      const alertBox = document.getElementById("volunteerSuccessAlert");
+
+      alertBox.textContent = `Terima kasih, ${name} (${domicile})! Minat bergabung pada bidang "${division}" bersama YSKN telah tercatat.`;
+      alertBox.classList.remove("d-none");
+    });
+
+    // Inisialisasi awal
+    renderRelatedReports(relatedReports);
+    renderPopularReports();
+    updateGallery();
+  </script>
+</body>
+</html>
